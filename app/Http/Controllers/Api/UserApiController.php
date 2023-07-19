@@ -11,7 +11,7 @@ class UserApiController extends Controller
 	public function index()
 	{
 		$user = auth()->id();
-		$user = User::find($user)->with('member')->first();
+		// $user = User::find($user)->with('member')->first();
 		return Response::json([
 			'user' => $user,
 		], 200);
