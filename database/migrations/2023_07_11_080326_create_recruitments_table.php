@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('recruitments', function (Blueprint $table) {
             $table->id();
+			$table->foreignId('user_id')->constrained('users');
 			$table->string('name');
 			$table->enum('strata',['d3','S1 terapan']);
 			$table->text('prodi');

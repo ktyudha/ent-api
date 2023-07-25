@@ -46,4 +46,8 @@ class User extends Authenticatable
 	{
 		return $this->hasOne(Member::class);
 	}
+	public function recruitment()
+    {
+        return $this->belongsTo(Recruitment::class);
+    }
 }

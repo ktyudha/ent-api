@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\RecruitmentIndexResource;
 use App\Models\Recruitment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Http\Resources\RecruitmentIndexResource;
 
 class RecruitmentController extends Controller
 {
@@ -37,25 +38,13 @@ class RecruitmentController extends Controller
      */
     public function store(Request $request)
     {
-        // $recruitment = [
-		// 	'name' => $request->name,
-		// 	'strata' => $request->strata,
-		// 	'prodi' => $request->prodi,
-		// 	'place_of_birth' => $request->place_of_birth,
-		// 	'date_of_birth' => $request->date_of_birth,
-		// 	'gender' => $request->gender,
-		// 	'religion' => $request->religion,
-		// 	'boarding_address' => $request->boarding_address,
-		// 	'home_address' => $request->home_address,
-		// 	'email' => $request->email,
-		// 	'phone' => $request->phone,
-		// 	'mbti' => $request->mbti,
-		// 	'motto' => $request->motto,
-		// 	'interest' => $request->interest,
-		// 	'division' => $request->division,
-		// 	// 'experience_id' => $request->division,
-		// ];
-		$createRecruitment = Recruitment::create([
+
+        DB::beginTransaction();
+
+        try {
+$user = auth()->id();
+        $recruitment = Recruitment::create([
+			'user_id'=>$user,
 		'name' => $request->name,
 		'strata' => $request->strata,
 		'prodi' => $request->prodi,
@@ -72,8 +61,35 @@ class RecruitmentController extends Controller
 		'interest' => $request->interest,
 		'division' => $request->division
 	]);
+
+
+       $recruitment->experience()->create([
+			'recruitment_id' => $recruitment->id,
+			'start_date'=> $request->start_date,
+			'end_date'=> $request->end_date,
+			'organization_name'=> $request->organization_name,
+			'position'=> $request->position,
+		]);
+
+		 $recruitment->achivement()->create([
+			'recruitment_id' => $recruitment->id,
+			'date' => $request->date,
+			'title' => $request->title,
+			'achivement' => $request->achivement,
+			'level' => $request->level,
+		]);
+
+    DB::commit();
+
+        } catch (\Exception $e) {
+			DB::rollBack();
+            //throw $th;
+        }
+
+
+
+
 	// loadMissing(['experience:id,start_date, end_date, organization_name, position', 'achivement:id, name, date, achivement, level'])
-		return new RecruitmentIndexResource($createRecruitment);
     }
 
     /**

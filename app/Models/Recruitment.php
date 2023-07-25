@@ -20,4 +20,8 @@ class Recruitment extends Model
         return $this->belongsTo(Achivement::class);
     }
 
+	public function user()
+    {
+        return $this->hasMany(User::class);
+    }
 }
