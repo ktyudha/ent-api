@@ -59,7 +59,9 @@ $user = auth()->id();
 		'mbti' => $request->mbti,
 		'motto' => $request->motto,
 		'interest' => $request->interest,
-		'division' => $request->division
+		'division' => $request->division,
+		'reason' => $request->reason,
+		'description' => $request->description,
 	]);
 
 
@@ -100,7 +102,8 @@ $user = auth()->id();
      */
     public function show(Recruitment $recruitment)
     {
-        //
+        $recruitment = Recruitment::with(['experience:id,start_date,end_date,organization_name,position','achivement:id,date,title,achivement,level'])->findOrFail($recruitment->id);
+        return new RecruitmentIndexResource($recruitment);
     }
 
     /**

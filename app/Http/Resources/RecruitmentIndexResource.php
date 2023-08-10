@@ -31,9 +31,9 @@ class RecruitmentIndexResource extends JsonResource
             'motto' => $this->motto,
             'interest' => $this->interest,
             'division' => $this->division,
-            'division' => $this->division,
-            // 'experience' => $this->whenLoaded('experience'),
-            // 'achivement' => $this->whenLoaded('achivement'),
+            'reason' => $this->reason,
+            'experience' => $this->whenLoaded('experience'),
+            'achivement' => $this->whenLoaded('achivement'),
             'created_at' => $this->created_at,
         ];
     }

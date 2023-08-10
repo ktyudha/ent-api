@@ -30,7 +30,9 @@ return new class extends Migration
 			$table->string('mbti');
 			$table->text('motto');
 			$table->text('interest');
+			$table->text('reason');
 			$table->enum('division',['Reporter','Videographer','Graphic Designer','Fotografer','Webmaster']);
+			$table->text('description');
             $table->timestamps();
         });
     }
