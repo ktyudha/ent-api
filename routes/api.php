@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\AchivementController;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LogController;
+use App\Http\Controllers\PictureController;
+use App\Http\Controllers\AchivementController;
 use App\Http\Controllers\ExperienceController;
 use App\Http\Controllers\Api\UserApiController;
 use App\Http\Controllers\RecruitmentController;
@@ -41,6 +42,7 @@ Route::middleware('auth:sanctum')->group(function () {
 		'experience' => ExperienceController::class,
 		'achivement'=> AchivementController::class,
 		'recruitment'=> RecruitmentController::class,
+		'picture' => PictureController::class
 	]);
 });
 
@@ -50,6 +52,7 @@ Route::apiResources([
 	'generations' => GenerationApiController::class,
 	'divisions' => DivisionApiController::class,
 	'members' => MemberApiController::class,
+
 
 	// finance
 	'finance' => FinanceApiController::class,

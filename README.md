@@ -77,3 +77,7 @@ Get Recruitment
 <img src = "./documentation/Get Recruitment.png" />
 Post Recruitment
 <img src = "./documentation/Post Recruitment.png" />
+Post Picture
+<img src = "./documentation/Post Picture.png" />
+Get Picture
+<img src = "./documentation/Get Picture.png" />

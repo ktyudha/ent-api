@@ -50,4 +50,8 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Recruitment::class);
     }
+	public function picture()
+    {
+        return $this->hasOne(Picture::class);
+    }
 }
