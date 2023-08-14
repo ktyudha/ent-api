@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-
+//implements MustVerifyEmail
 class User extends Authenticatable
 {
 	use HasApiTokens, HasFactory, Notifiable;
@@ -47,11 +47,11 @@ class User extends Authenticatable
 		return $this->hasOne(Member::class);
 	}
 	public function recruitment()
-    {
-        return $this->belongsTo(Recruitment::class);
-    }
+	{
+		return $this->belongsTo(Recruitment::class);
+	}
 	public function picture()
-    {
-        return $this->hasOne(Picture::class);
-    }
+	{
+		return $this->hasOne(Picture::class);
+	}
 }

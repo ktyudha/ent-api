@@ -6,22 +6,23 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
-    public function up()
-    {
-        Schema::create('recruitments', function (Blueprint $table) {
-            $table->id();
+	/**
+	 * Run the migrations.
+	 *
+	 * @return void
+	 */
+	public function up()
+	{
+		Schema::create('recruitments', function (Blueprint $table) {
+			$table->uuid('id')->primary();
 			$table->foreignId('user_id')->constrained('users');
 			$table->string('name');
-			$table->enum('strata',['d3','S1 terapan']);
+			$table->string('nrp');
+			$table->enum('strata', ['d3', 'S1 terapan']);
 			$table->text('prodi');
 			$table->string('place_of_birth');
 			$table->string('date_of_birth');
-			$table->enum('gender',['male','female']);
+			$table->enum('gender', ['male', 'female']);
 			$table->string('religion');
 			$table->text('boarding_address');
 			$table->text('home_address');
@@ -31,19 +32,20 @@ return new class extends Migration
 			$table->text('motto');
 			$table->text('interest');
 			$table->text('reason');
-			$table->enum('division',['Reporter','Videographer','Graphic Designer','Fotografer','Webmaster']);
+			$table->enum('division', ['Reporter', 'Videographer', 'Graphic Designer', 'Fotografer', 'Webmaster']);
 			$table->text('description');
-            $table->timestamps();
-        });
-    }
+			$table->longText('url_portofolio');
+			$table->timestamps();
+		});
+	}
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
-        Schema::dropIfExists('recruitments');
-    }
+	/**
+	 * Reverse the migrations.
+	 *
+	 * @return void
+	 */
+	public function down()
+	{
+		Schema::dropIfExists('recruitments');
+	}
 };

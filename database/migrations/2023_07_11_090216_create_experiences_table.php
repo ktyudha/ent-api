@@ -6,31 +6,32 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
-    public function up()
-    {
-        Schema::create('experiences', function (Blueprint $table) {
-            $table->id();
-			$table->foreignId('recruitment_id')->constrained('recruitments');
+	/**
+	 * Run the migrations.
+	 *
+	 * @return void
+	 */
+	public function up()
+	{
+		Schema::create('experiences', function (Blueprint $table) {
+			$table->id();
+			$table->uuid('recruitment_id');
+			$table->foreign('recruitment_id')->references('id')->on('recruitments');
 			$table->text('start_date');
 			$table->text('end_date');
 			$table->text('organization_name');
 			$table->string('position');
-            $table->timestamps();
-        });
-    }
+			$table->timestamps();
+		});
+	}
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
-        Schema::dropIfExists('experiences');
-    }
+	/**
+	 * Reverse the migrations.
+	 *
+	 * @return void
+	 */
+	public function down()
+	{
+		Schema::dropIfExists('experiences');
+	}
 };
