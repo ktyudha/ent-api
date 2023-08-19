@@ -13,13 +13,13 @@ return new class extends Migration
 	 */
 	public function up()
 	{
-		Schema::create('achivements', function (Blueprint $table) {
+		Schema::create('achievements', function (Blueprint $table) {
 			$table->id();
 			$table->uuid('recruitment_id');
 			$table->foreign('recruitment_id')->references('id')->on('recruitments');
 			$table->text('date');
 			$table->text('title');
-			$table->string('achivement');
+			$table->string('achievement');
 			$table->string('level');
 			$table->timestamps();
 		});
@@ -32,6 +32,6 @@ return new class extends Migration
 	 */
 	public function down()
 	{
-		Schema::dropIfExists('achivements');
+		Schema::dropIfExists('achievements');
 	}
 };

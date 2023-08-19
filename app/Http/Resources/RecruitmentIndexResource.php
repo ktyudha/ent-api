@@ -2,7 +2,7 @@
 
 namespace App\Http\Resources;
 
-use App\Http\Resources\AchivementResource;
+use App\Http\Resources\AchievementResource;
 use App\Http\Resources\ExperienceResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -20,7 +20,8 @@ class RecruitmentIndexResource extends JsonResource
 		return [
 			'id' => $this->id,
 			'name' => $this->name,
-			'strata' => $this->strata,
+			'nrp' => $this->nrp,
+			// 'strata' => $this->strata,
 			'prodi' => $this->prodi,
 			'place_of_birth' => $this->place_of_birth,
 			'date_of_birth' => $this->date_of_birth,
@@ -35,11 +36,13 @@ class RecruitmentIndexResource extends JsonResource
 			'interest' => $this->interest,
 			'division' => $this->division,
 			'reason' => $this->reason,
+			'description' => $this->description,
+			'created_at' => $this->created_at,
 			// Informasi pengalaman
 			'experience' => ExperienceResource::collection($this->whenLoaded('experience')),
 
 			// Informasi pencapaian
-			'achivement' => AchivementResource::collection($this->whenLoaded('achivement')),
+			'achievement' => AchievementResource::collection($this->whenLoaded('achievement')),
 			'created_at' => $this->created_at,
 		];
 	}

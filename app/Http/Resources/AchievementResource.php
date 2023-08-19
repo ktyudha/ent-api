@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ExperienceResource extends JsonResource
+class AchievementResource extends JsonResource
 {
 	/**
 	 * Transform the resource into an array.
@@ -16,10 +16,10 @@ class ExperienceResource extends JsonResource
 	{
 		// return parent::toArray($request);
 		return [
-			'start_date' => $this->start_date,
-			'end_date' => $this->end_date,
-			'organization_name' => $this->organization_name,
-			'position' => $this->position,
+			'date' => $this->date,
+			'title' => $this->title,
+			'achievement' => $this->achievement,
+			'level' => $this->level
 		];
 	}
 }

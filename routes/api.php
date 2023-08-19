@@ -34,16 +34,13 @@ Route::post('auth/register', RegisterController::class);
 Route::post('auth/login', LoginController::class);
 // Route::apiResource('recruitment', RecruitmentController::class);
 
+Route::apiResource('recruitment', RecruitmentController::class,);
+Route::post('cekrecruitment', [RecruitmentController::class, 'cekrecruitment'])->name('cek_recruitment');
+
 Route::middleware('auth:sanctum')->group(function () {
 	Route::post('auth/logout', LogoutController::class);
 	Route::get('user', [UserApiController::class, 'index']);
 	// Route::post('recruitment', [RecruitmentController::class, 'store']);
-	Route::apiResources([
-		'experience' => ExperienceController::class,
-		'achivement'=> AchivementController::class,
-		'recruitment'=> RecruitmentController::class,
-		'picture' => PictureController::class
-	]);
 });
 
 Route::apiResources([

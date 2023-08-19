@@ -18,7 +18,7 @@ class RecruitmentController extends Controller
 	 */
 	public function index()
 	{
-		$recruitments = Recruitment::with(['experience', 'achivement']) // Memuat relasi experience dan achivement
+		$recruitments = Recruitment::with(['experience', 'achievement']) // Memuat relasi experience dan achivement
 			->orderBy('id', 'DESC')
 			->get();
 
@@ -47,18 +47,18 @@ class RecruitmentController extends Controller
 		DB::beginTransaction();
 
 		try {
-			$user = auth()->id();
+			// $user = auth()->id();
 			$uuid = Uuid::uuid4();
 
 			$request->validate([
 				'name' => ['required', 'unique:recruitments'],
-				'nrp' => ['required', 'unique:recruitments'],
 				'email' => ['required', 'unique:recruitments'],
+				'nrp' => ['required', 'unique:recruitments'],
 			]);
 
 			$recruitment = Recruitment::create([
 				'id' => $uuid->toString(),
-				'user_id' => $user,
+				// 'user_id' => $user,
 				'name' => strtolower($request->name),
 				'nrp' => $request->nrp,
 				'strata' => $request->strata,
@@ -93,14 +93,14 @@ class RecruitmentController extends Controller
 				}
 			}
 
-			$achievements = $request->input('achivements'); // array of achievement data
+			$achievements = $request->input('achievements'); // array of achievement data
 			if ($achievements) {
 				foreach ($achievements as $achievementData) {
-					$recruitment->achivement()->create([
+					$recruitment->achievement()->create([
 						'recruitment_id' => $recruitment->id,
 						'date' => $achievementData['date'],
 						'title' => $achievementData['title'],
-						'achivement' => $achievementData['achivement'],
+						'achievement' => $achievementData['achievement'],
 						'level' => $achievementData['level'],
 					]);
 				}
@@ -120,7 +120,7 @@ class RecruitmentController extends Controller
 	 */
 	public function show(Recruitment $recruitment)
 	{
-		$recruitment = Recruitment::with(['experience', 'achivement'])->findOrFail($recruitment->id);
+		$recruitment = Recruitment::with(['experience', 'achievement'])->findOrFail($recruitment->id);
 		return new RecruitmentIndexResource($recruitment);
 	}
 
@@ -156,5 +156,27 @@ class RecruitmentController extends Controller
 	public function destroy(Recruitment $recruitment)
 	{
 		//
+	}
+
+	public function cekRecruitment(Request $request)
+	{
+		$request->validate([
+			'email' => 'required|email',
+			'nrp' => 'required',
+		]);
+
+		$recruitment = Recruitment::where('email', $request->email)->first();
+
+		// dd($user);
+		if (!$recruitment || !Recruitment::check($request->nrp, $recruitment->nrp)) {
+			return response()->json([
+				'message' => 'Your credential does not match.',
+			], 401);;
+		}
+		// $recruitment->id;
+		return response()->json([
+			'id' => $recruitment->id,
+			'message' => 'Success',
+		], 200);
 	}
 }

@@ -15,10 +15,9 @@ return new class extends Migration
 	{
 		Schema::create('recruitments', function (Blueprint $table) {
 			$table->uuid('id')->primary();
-			$table->foreignId('user_id')->constrained('users');
 			$table->string('name');
 			$table->string('nrp');
-			$table->enum('strata', ['d3', 'S1 terapan']);
+			$table->string('strata');
 			$table->text('prodi');
 			$table->string('place_of_birth');
 			$table->string('date_of_birth');

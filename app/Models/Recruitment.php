@@ -18,13 +18,18 @@ class Recruitment extends Model
 		$this->attributes['name'] = strtolower($value);
 	}
 
+	public static function check($nrp1, $nrp2)
+	{
+		return $nrp1 === $nrp2;
+	}
+
 	public function experience()
 	{
 		return $this->hasMany(Experience::class, 'recruitment_id');
 	}
-	public function achivement()
+	public function achievement()
 	{
-		return $this->hasMany(Achivement::class, 'recruitment_id');
+		return $this->hasMany(Achievement::class, 'recruitment_id');
 	}
 
 	public function user()
