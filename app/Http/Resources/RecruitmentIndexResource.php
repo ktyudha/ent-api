@@ -43,7 +43,7 @@ class RecruitmentIndexResource extends JsonResource
 
 			// Informasi pencapaian
 			'achievement' => AchievementResource::collection($this->whenLoaded('achievement')),
-			'created_at' => $this->created_at,
+			'url_portofolio' => $this->url_portofolio,
 		];
 	}
 }

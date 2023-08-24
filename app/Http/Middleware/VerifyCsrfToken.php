@@ -14,5 +14,6 @@ class VerifyCsrfToken extends Middleware
 	protected $except = [
 		//
 		'http://ent-api.test/api/*',
+
 	];
 }
