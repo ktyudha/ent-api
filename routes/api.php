@@ -34,7 +34,7 @@ Route::post('auth/register', RegisterController::class);
 Route::post('auth/login', LoginController::class);
 // Route::apiResource('recruitment', RecruitmentController::class);
 
-Route::apiResource('recruitment', RecruitmentController::class,);
+Route::apiResource('recruitment', RecruitmentController::class);
 Route::post('cekrecruitment', [RecruitmentController::class, 'cekrecruitment'])->name('cek_recruitment');
 
 Route::middleware('auth:sanctum')->group(function () {

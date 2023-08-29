@@ -109,12 +109,13 @@ class RecruitmentController extends Controller
 			DB::commit();
 			return response()->json([
 				'message' => 'Your Submit form Success',
+				'id' => $recruitment->id,
 			], 200);
 		} catch (\Exception $e) {
+			DB::rollBack();
 			return response()->json([
 				'message' => 'Your Submit form Failed. Please try again',
-			], 401);;
-			DB::rollBack();
+			], 400);
 		}
 	}
 
