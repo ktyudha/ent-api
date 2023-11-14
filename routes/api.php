@@ -17,6 +17,8 @@ use App\Http\Controllers\Api\DivisionApiController;
 use App\Http\Controllers\Api\Auth\RegisterController;
 use App\Http\Controllers\Api\DepartmentApiController;
 use App\Http\Controllers\Api\GenerationApiController;
+use App\Http\Controllers\Api\ShortlinkController;
+use App\Http\Controllers\Api\NotulensiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,10 +34,12 @@ use App\Http\Controllers\Api\GenerationApiController;
 
 Route::post('auth/register', RegisterController::class);
 Route::post('auth/login', LoginController::class);
-// Route::apiResource('recruitment', RecruitmentController::class);
 
 Route::apiResource('recruitment', RecruitmentController::class);
 Route::post('cekrecruitment', [RecruitmentController::class, 'cekrecruitment'])->name('cek_recruitment');
+
+Route::apiResource('shortlink', ShortlinkController::class);
+Route::apiResource('notulensi', NotulensiController::class);
 
 Route::middleware('auth:sanctum')->group(function () {
 	Route::post('auth/logout', LogoutController::class);
